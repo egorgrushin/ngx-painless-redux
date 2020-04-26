@@ -14,7 +14,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-painless-redux": [
+        "dist/ngx-painless-redux/ngx-painless-redux",
+        "dist/ngx-painless-redux",
+        "dist/ngx-painless-redux/ngx-painless-redux",
+        "dist/ngx-painless-redux",
+        "dist/ngx-painless-redux/ngx-painless-redux",
+        "dist/ngx-painless-redux"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

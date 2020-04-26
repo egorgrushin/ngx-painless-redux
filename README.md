@@ -1,27 +1,67 @@
-# NgxPainlessRedux
+#NgxPainlessRedux
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+###Install: 
+- `npm i painless-redux ngx-painless-redux @ngrx/store`
+- Import `NgxPainlessReduxModule` to your app module next to StoreModule from [@ngrx/store](https://www.npmjs.com/package/@ngrx/store):
 
-## Development server
+```
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    StoreModule.forRoot({}),
+    NgxPainlessReduxModule, // <-- here
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+- Inherit from `EntityStorageService`:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+import { Injectable } from '@angular/core';
+import { EntityStorageService } from 'ngx-painless-redux';
 
-## Build
+export interface Entity1 {
+  id: string;
+  name: string;
+  age: number;
+}
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+@Injectable({ providedIn: 'root' })
+export class Entity1Storage extends EntityStorageService<Entity1> {
 
-## Running unit tests
+  constructor() {
+    super({ name: 'Entity1', pageSize: 2, maxPagesCount: 2 });
+  }
+}
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- or from `WorkspaceStorageService`:
 
-## Running end-to-end tests
+```
+import { Injectable } from '@angular/core';
+import { WorkspaceStorageService } from 'ngx-painless-redux';
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+export interface Workspace1 {
+  filter: number[];
+}
 
-## Further help
+@Injectable({ providedIn: 'root' })
+export class Workspace1Storage extends WorkspaceStorageService<Workspace1> {
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  constructor() {
+    super({
+      name: 'Workspace1', 
+      initialValue: {
+        filter: [1, 2, 3],
+      },
+    });
+  }
+}
+```
+- inject it to your components / services
