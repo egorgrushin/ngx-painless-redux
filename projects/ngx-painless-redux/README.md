@@ -1,24 +1,76 @@
 # NgxPainlessRedux
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
+### Description
 
-## Code scaffolding
+This is [painless-redux](https://github.com/egorgrushin/painless-redux) adapter for Angular using [@ngrx/store](https://www.npmjs.com/package/@ngrx/store).
 
-Run `ng generate component component-name --project ngx-painless-redux` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-painless-redux`.
-> Note: Don't forget to add `--project ngx-painless-redux` or else it will be added to the default project in your `angular.json` file. 
+### Install: 
+1. `npm i painless-redux ngx-painless-redux @ngrx/store`
+2. Import `NgxPainlessReduxModule` to your app module next to `StoreModule` from [@ngrx/store](https://www.npmjs.com/package/@ngrx/store), then import `actionSanitizer` from `painless-redux` and add it as actionSanitizer for ` StoreDevtoolsModule.instrument` param:
 
-## Build
+```typescript
+import { NgxPainlessReduxModule } from 'ngx-painless-redux';
+import { actionSanitizer } from 'painless-redux';
 
-Run `ng build ngx-painless-redux` to build the project. The build artifacts will be stored in the `dist/` directory.
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      actionSanitizer, // <-- here
+    }),
+    NgxPainlessReduxModule, // <-- here
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
 
-## Publishing
+3. Inherit from `EntityStorageService`:
 
-After building your library with `ng build ngx-painless-redux`, go to the dist folder `cd dist/ngx-painless-redux` and run `npm publish`.
+```typescript
+import { Injectable } from '@angular/core';
+import { EntityStorageService } from 'ngx-painless-redux';
 
-## Running unit tests
+export interface Entity1 {
+  id: string;
+  name: string;
+  age: number;
+}
 
-Run `ng test ngx-painless-redux` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@Injectable({ providedIn: 'root' })
+export class Entity1Storage extends EntityStorageService<Entity1> {
 
-## Further help
+  constructor() {
+    super({ name: 'Entity1', pageSize: 2, maxPagesCount: 2 });
+  }
+}
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+4. or from `WorkspaceStorageService`:
+
+```typescript
+import { Injectable } from '@angular/core';
+import { WorkspaceStorageService } from 'ngx-painless-redux';
+
+export interface Workspace1 {
+  filter: number[];
+}
+
+@Injectable({ providedIn: 'root' })
+export class Workspace1Storage extends WorkspaceStorageService<Workspace1> {
+
+  constructor() {
+    super({
+      name: 'Workspace1', 
+      initialValue: {
+        filter: [1, 2, 3],
+      },
+    });
+  }
+}
+```
+5. inject it to your components / services
