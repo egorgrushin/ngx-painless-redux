@@ -15,7 +15,7 @@ import {
   EntityLoadOptions,
   EntityRemoveOptions,
   EntitySchema,
-  EntitySetStateOptions,
+  EntitySetLoadingStateOptions,
   Id,
   LoadingState,
   Page,
@@ -66,29 +66,29 @@ export abstract class EntityStorageService<T> {
     return this.entity.addRemote$(entity, config, dataSource$, options);
   }
 
-  affectState(
+  affectLoadingState(
     config?: unknown,
     key?: string,
     rethrow?: boolean,
   ) {
-    return this.entity.affectState(config, key, rethrow);
+    return this.entity.affectLoadingState(config, key, rethrow);
   }
 
-  affectStateByConfigOrId(
+  affectLoadingStateByConfigOrId(
     config?: unknown,
     id?: Id,
     key?: string,
     rethrow?: boolean,
   ) {
-    return this.entity.affectStateByConfigOrId(config, id, key, rethrow);
+    return this.entity.affectLoadingStateByConfigOrId(config, id, key, rethrow);
   }
 
-  affectStateById(
+  affectLoadingStateById(
     id?: Id,
     key?: string,
     rethrow?: boolean,
   ) {
-    return this.entity.affectStateById(id, key, rethrow);
+    return this.entity.affectLoadingStateById(id, key, rethrow);
   }
 
   batch(actions: EntityActions[]): EntityActions {
@@ -169,20 +169,20 @@ export abstract class EntityStorageService<T> {
     return this.entity.restoreRemoved(id);
   }
 
-  setState(state: LoadingState, config?: unknown, options?: EntitySetStateOptions): EntityActions {
-    return this.entity.setState(state, config, options);
+  setLoadingState(state: LoadingState, config?: unknown, options?: EntitySetLoadingStateOptions): EntityActions {
+    return this.entity.setLoadingState(state, config, options);
   }
 
-  setStateBus(state: LoadingState, id?: Id, config?: unknown, key?: string): EntityActions {
-    return this.entity.setStateBus(state, id, config, key);
+  setLoadingStateBus(state: LoadingState, id?: Id, config?: unknown, key?: string): EntityActions {
+    return this.entity.setLoadingStateBus(state, id, config, key);
   }
 
-  setStateById(id: Id, state: LoadingState, options?: EntitySetStateOptions): EntityActions {
-    return this.entity.setStateById(id, state, options);
+  setLoadingStateById(id: Id, state: LoadingState, options?: EntitySetLoadingStateOptions): EntityActions {
+    return this.entity.setLoadingStateById(id, state, options);
   }
 
-  setStateForKey(id: Id, key: string, state: LoadingState, options?: EntitySetStateOptions): EntityActions {
-    return this.entity.setStateForKey(id, key, state, options);
+  setLoadingStateForKey(id: Id, key: string, state: LoadingState, options?: EntitySetLoadingStateOptions): EntityActions {
+    return this.entity.setLoadingStateForKey(id, key, state, options);
   }
 
 }

@@ -56,8 +56,8 @@ export abstract class WorkspaceStorageService<T> implements Workspace<T> {
     return this.workspace.getLoadingState$(isAsap);
   }
 
-  setState(state: LoadingState, key?: string, options?: LoadingStateSetOptions): WorkspaceActions {
-    return this.workspace.setState(state, key, options);
+  setLoadingState(state: LoadingState, key?: string, options?: LoadingStateSetOptions): WorkspaceActions {
+    return this.workspace.setLoadingState(state, key, options);
   }
 
 }
