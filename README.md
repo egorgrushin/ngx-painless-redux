@@ -1,12 +1,12 @@
-#NgxPainlessRedux
+# NgxPainlessRedux
 
-###Description
+### Description
 
 This is [painless-redux](https://github.com/egorgrushin/painless-redux) adapter for Angular using [@ngrx/store](https://www.npmjs.com/package/@ngrx/store).
 
-###Install: 
-- `npm i painless-redux ngx-painless-redux @ngrx/store`
-- Import `NgxPainlessReduxModule` to your app module next to StoreModule from [@ngrx/store](https://www.npmjs.com/package/@ngrx/store):
+### Install: 
+1. `npm i painless-redux ngx-painless-redux @ngrx/store`
+2. Import `NgxPainlessReduxModule` to your app module next to StoreModule from [@ngrx/store](https://www.npmjs.com/package/@ngrx/store):
 
 ```
 @NgModule({
@@ -24,7 +24,7 @@ export class AppModule {}
 ```
 
 
-- Inherit from `EntityStorageService`:
+3. Inherit from `EntityStorageService`:
 
 ```
 import { Injectable } from '@angular/core';
@@ -45,7 +45,7 @@ export class Entity1Storage extends EntityStorageService<Entity1> {
 }
 ```
 
-- or from `WorkspaceStorageService`:
+4. or from `WorkspaceStorageService`:
 
 ```
 import { Injectable } from '@angular/core';
@@ -68,4 +68,4 @@ export class Workspace1Storage extends WorkspaceStorageService<Workspace1> {
   }
 }
 ```
-- inject it to your components / services
+5. inject it to your components / services
