@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { createPainlessRedux } from 'painless-redux';
 import { PAINLESS_REDUX_TOKEN } from './tokens';
 
-export function factory(rxStore: Store) {
+export function factory(rxStore: Store<any>) {
   return createPainlessRedux(rxStore);
 }
 
