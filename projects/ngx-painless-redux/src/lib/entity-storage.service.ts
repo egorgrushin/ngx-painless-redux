@@ -21,9 +21,10 @@ import {
   Page,
   PainlessRedux,
   Response$Factory,
+  EntityGetOptions,
 } from 'painless-redux';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 export abstract class EntityStorageService<T> {
 
@@ -39,6 +40,14 @@ export abstract class EntityStorageService<T> {
     this.actionCreators = this.entity.actionCreators;
   }
 
+  getById$(
+    id: Id,
+    dataSource?: Observable<T>,
+    options?: EntityGetOptions,
+  ): Observable<T | undefined> {
+    return this.entity.getById$(id, dataSource, options);
+  }
+
   get$(
     config: unknown,
     dataSource?: (Observable<T[]> | Response$Factory<T[]>),
@@ -46,6 +55,15 @@ export abstract class EntityStorageService<T> {
     paginatorSubj?: BehaviorSubject<boolean>,
   ): Observable<T[] | undefined> {
     return this.entity.get$(config, dataSource, options, paginatorSubj);
+  }
+
+  getDictionary$(
+    config: unknown,
+    dataSource?: (Observable<T[]> | Response$Factory<T[]>),
+    options?: EntityGetListOptions,
+    paginatorSubj?: BehaviorSubject<boolean>,
+  ): Observable<Dictionary<T>> {
+    return this.entity.getDictionary$(config, dataSource, options, paginatorSubj);
   }
 
   add(data: T, config?: unknown, options?: EntityAddOptions): EntityActions {
