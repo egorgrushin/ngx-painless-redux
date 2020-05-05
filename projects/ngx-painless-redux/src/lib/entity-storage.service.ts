@@ -11,24 +11,27 @@ import {
   EntityAddListOptions,
   EntityAddOptions,
   EntityGetListOptions,
+  EntityGetOptions,
   EntityLoadListOptions,
   EntityLoadOptions,
   EntityRemoveOptions,
   EntitySchema,
   EntitySetLoadingStateOptions,
   Id,
+  IdPatch,
+  IdPatchRequest,
   LoadingState,
   Page,
   PainlessRedux,
+  PatchRequest,
   Response$Factory,
-  EntityGetOptions,
 } from 'painless-redux';
 
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export abstract class EntityStorageService<T> {
 
-  actionCreators: EntityActionCreators;
+  actionCreators: EntityActionCreators<T>;
 
   private entity: Entity<T>;
 
@@ -113,17 +116,36 @@ export abstract class EntityStorageService<T> {
     return this.entity.batch(actions);
   }
 
-  change(id: Id, patch: DeepPartial<T>, options?: ChangeOptions): EntityActions {
+  change(
+    id: Id,
+    patch: PatchRequest<T>,
+    options?: ChangeOptions,
+  ): EntityActions {
     return this.entity.change(id, patch, options);
+  }
+
+  changeList(
+    patches: IdPatchRequest<T>[],
+    options?: ChangeOptions,
+  ): EntityActions {
+    return this.entity.changeList(patches, options);
   }
 
   changeRemote$(
     id: Id,
-    patch: DeepPartial<T>,
+    patch: PatchRequest<T>,
     dataSource$: Observable<DeepPartial<T> | undefined>,
     options?: ChangeOptions,
   ): Observable<DeepPartial<T>> {
     return this.entity.changeRemote$(id, patch, dataSource$, options);
+  }
+
+  changeListRemote$(
+    patches: IdPatchRequest<T>[],
+    dataSource$: Observable<IdPatch<T>[] | undefined>,
+    options?: ChangeOptions,
+  ): Observable<IdPatch<T>[] | undefined> {
+    return this.entity.changeListRemote$(patches, dataSource$, options);
   }
 
   clear(config: unknown): EntityActions {

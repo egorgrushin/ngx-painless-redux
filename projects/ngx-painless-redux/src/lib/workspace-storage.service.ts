@@ -2,7 +2,6 @@ import {
   ChangeOptions,
   createWorkspace,
   DeepPartial,
-  Id,
   LoadingState,
   LoadingStateSetOptions,
   PainlessRedux,
@@ -10,6 +9,7 @@ import {
   WorkspaceActionCreators,
   WorkspaceActions,
   WorkspaceSchema,
+  PatchRequest,
 } from 'painless-redux';
 import { inject } from '@angular/core';
 import { PAINLESS_REDUX_TOKEN } from './tokens';
@@ -32,7 +32,7 @@ export abstract class WorkspaceStorageService<T> implements Workspace<T> {
   }
 
   change(
-    patch: DeepPartial<T> | ((value: (DeepPartial<T> | undefined)) => DeepPartial<T>),
+    patch: PatchRequest<T>,
     label: string,
     options?: ChangeOptions
   ): WorkspaceActions {
@@ -40,7 +40,7 @@ export abstract class WorkspaceStorageService<T> implements Workspace<T> {
   }
 
   changeRemote$(
-    patch: DeepPartial<T>,
+    patch: PatchRequest<T>,
     dataSource$: Observable<DeepPartial<T> | undefined>,
     label: string,
     options?: ChangeOptions
