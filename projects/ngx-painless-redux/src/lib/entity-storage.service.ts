@@ -21,10 +21,11 @@ import {
   IdPatch,
   IdPatchRequest,
   LoadingState,
-  Page,
+  Page, PaginatedResponse,
   PainlessRedux,
   PatchRequest,
   Response$Factory,
+  ResponseArray,
 } from 'painless-redux';
 
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -53,7 +54,7 @@ export abstract class EntityStorageService<T> {
 
   get$(
     config: unknown,
-    dataSource?: (Observable<T[]> | Response$Factory<T[]>),
+    dataSource?: Observable<ResponseArray<T>> | Response$Factory<T>,
     options?: EntityGetListOptions,
     paginatorSubj?: BehaviorSubject<boolean>,
   ): Observable<T[] | undefined> {
@@ -62,7 +63,7 @@ export abstract class EntityStorageService<T> {
 
   getDictionary$(
     config: unknown,
-    dataSource?: (Observable<T[]> | Response$Factory<T[]>),
+    dataSource?: Observable<ResponseArray<T>> | Response$Factory<T>,
     options?: EntityGetListOptions,
     paginatorSubj?: BehaviorSubject<boolean>,
   ): Observable<Dictionary<T>> {
@@ -190,10 +191,10 @@ export abstract class EntityStorageService<T> {
 
   loadList$(
     config: unknown,
-    dataSource: Observable<T[]> | Response$Factory<T[]>,
+    dataSource: Observable<ResponseArray<T>> | Response$Factory<T>,
     options?: EntityLoadListOptions,
     paginatorSubj?: BehaviorSubject<boolean>,
-  ): Observable<never> {
+  ): Observable<PaginatedResponse<T>> {
     return this.entity.loadList$(config, dataSource, options, paginatorSubj);
   }
 
