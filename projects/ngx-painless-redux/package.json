@@ -10,6 +10,6 @@
   },
   "devDependencies": {
     "@ngrx/store": "^9.1.0",
-    "painless-redux": "^4.0.7"
+    "painless-redux": "^4.1.5"
   }
 }
