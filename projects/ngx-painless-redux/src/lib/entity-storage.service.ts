@@ -27,10 +27,10 @@ import {
   PatchRequest,
   Response$Factory,
   ResponseArray,
+  EntityRemoveListOptions,
 } from 'painless-redux';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { EntityRemoveListOptions } from 'painless-redux/src/entity/types';
 
 export abstract class EntityStorageService<T> {
 
