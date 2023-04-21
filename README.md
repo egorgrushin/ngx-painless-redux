@@ -1,5 +1,9 @@
 #NgxPainlessRedux
 
+###Description
+
+This is [painless-redux](https://github.com/egorgrushin/painless-redux) adapter for Angular using [@ngrx/store](https://www.npmjs.com/package/@ngrx/store).
+
 ###Install: 
 - `npm i painless-redux ngx-painless-redux @ngrx/store`
 - Import `NgxPainlessReduxModule` to your app module next to StoreModule from [@ngrx/store](https://www.npmjs.com/package/@ngrx/store):
