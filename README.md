@@ -6,9 +6,9 @@ This is [painless-redux](https://github.com/egorgrushin/painless-redux) adapter 
 
 ### Install: 
 1. `npm i painless-redux ngx-painless-redux @ngrx/store`
-2. Import `NgxPainlessReduxModule` to your app module next to StoreModule from [@ngrx/store](https://www.npmjs.com/package/@ngrx/store):
+2. Import `NgxPainlessReduxModule` to your app module next to `StoreModule` from [@ngrx/store](https://www.npmjs.com/package/@ngrx/store):
 
-```
+```typescript
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +26,7 @@ export class AppModule {}
 
 3. Inherit from `EntityStorageService`:
 
-```
+```typescript
 import { Injectable } from '@angular/core';
 import { EntityStorageService } from 'ngx-painless-redux';
 
@@ -47,7 +47,7 @@ export class Entity1Storage extends EntityStorageService<Entity1> {
 
 4. or from `WorkspaceStorageService`:
 
-```
+```typescript
 import { Injectable } from '@angular/core';
 import { WorkspaceStorageService } from 'ngx-painless-redux';
 
