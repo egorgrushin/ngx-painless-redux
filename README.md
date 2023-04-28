@@ -6,9 +6,13 @@ This is [painless-redux](https://github.com/egorgrushin/painless-redux) adapter 
 
 ### Install: 
 1. `npm i painless-redux ngx-painless-redux @ngrx/store`
-2. Import `NgxPainlessReduxModule` to your app module next to `StoreModule` from [@ngrx/store](https://www.npmjs.com/package/@ngrx/store):
+2. Import `NgxPainlessReduxModule` to your app module next to `StoreModule` from [@ngrx/store](https://www.npmjs.com/package/@ngrx/store)
+then import `actionSanitizer` from `painless-redux` and add it as actionSanitizer for ` StoreDevtoolsModule.instrument` param:
 
 ```typescript
+import { NgxPainlessReduxModule } from 'ngx-painless-redux';
+import { actionSanitizer } from 'painless-redux';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,13 +20,16 @@ This is [painless-redux](https://github.com/egorgrushin/painless-redux) adapter 
   imports: [
     BrowserModule,
     StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 100, // Retains last 25 states
+      actionSanitizer, // <-- here
+    }),
     NgxPainlessReduxModule, // <-- here
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
 ```
-
 
 3. Inherit from `EntityStorageService`:
 
