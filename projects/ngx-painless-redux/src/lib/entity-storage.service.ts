@@ -185,7 +185,7 @@ export abstract class EntityStorageService<T> {
     return this.entity.getPages$();
   }
 
-  loadById$(id: Id, dataSource$: Observable<T>, options?: EntityLoadOptions): Observable<never> {
+  loadById$(id: Id, dataSource$: Observable<T>, options?: EntityLoadOptions): Observable<T> {
     return this.entity.loadById$(id, dataSource$, options);
   }
 
