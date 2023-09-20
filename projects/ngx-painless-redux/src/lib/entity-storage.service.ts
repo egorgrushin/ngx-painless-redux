@@ -21,7 +21,8 @@ import {
   IdPatch,
   IdPatchRequest,
   LoadingState,
-  Page, PaginatedResponse,
+  Page,
+  PaginatedResponse,
   PainlessRedux,
   PatchRequest,
   Response$Factory,
@@ -29,6 +30,7 @@ import {
 } from 'painless-redux';
 
 import { BehaviorSubject, Observable } from 'rxjs';
+import { EntityRemoveListOptions } from 'painless-redux/src/entity/types';
 
 export abstract class EntityStorageService<T> {
 
@@ -204,6 +206,14 @@ export abstract class EntityStorageService<T> {
 
   removeRemote$<R>(id: Id, observable: Observable<R>, options?: EntityRemoveOptions): Observable<R> {
     return this.entity.removeRemote$(id, observable, options);
+  }
+
+  removeListRemote$<R>(
+    ids: Id[],
+    observable: Observable<R>,
+    options?: EntityRemoveListOptions,
+  ): Observable<R> {
+    return this.entity.removeListRemote$(ids, observable, options);
   }
 
   restoreRemoved(id: Id): EntityActions {
