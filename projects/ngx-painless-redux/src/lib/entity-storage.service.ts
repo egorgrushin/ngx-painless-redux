@@ -14,6 +14,7 @@ import {
   EntityGetOptions,
   EntityLoadListOptions,
   EntityLoadOptions,
+  EntityRemoveListOptions,
   EntityRemoveOptions,
   EntitySchema,
   EntitySetLoadingStateOptions,
@@ -27,7 +28,6 @@ import {
   PatchRequest,
   Response$Factory,
   ResponseArray,
-  EntityRemoveListOptions,
 } from 'painless-redux';
 
 import { BehaviorSubject, Observable } from 'rxjs';
